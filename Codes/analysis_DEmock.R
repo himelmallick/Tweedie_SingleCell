@@ -50,9 +50,7 @@ methods<-c('MAST',
 # List of datasets #
 ####################
 
-datasets <- c('Kidney',
-              'PBMC',
-              'Klein',
+datasets <- c('Klein',
               'Svensson')
 
 ######################
@@ -72,21 +70,6 @@ for (i in 1:length(datasets)){
   # Load dataset one by one #
   ###########################
   
-  ##########
-  # Kidney #
-  ##########
-  
-  if(dataset=='Kidney'){
-    
-    Mousesub.eset <- readRDS(file = "./Data/Mousesubeset.rds")
-    counts <- exprs(Mousesub.eset) # matrix of observations
-    features<-as.data.frame(t(counts))
-    metadata<-as.data.frame(rbinom(n=nrow(features), size=1, prob=0.05))
-    names(metadata)<-'CellType'
-    rownames(metadata)<-rownames(features)
-    
-  }
-  
   #########
   # Klein #
   #########
@@ -101,22 +84,6 @@ for (i in 1:length(datasets)){
     rownames(metadata)<-rownames(features)
     
   }
-  
-  ########
-  # PBMC #
-  ########
-  
-  if (dataset=='PBMC'){
-
-    pbmc <- readRDS(file = "./Data/pbmc3k_final.rds")
-    counts = pbmc@assays$RNA@counts
-    features<-as.data.frame(t(counts))
-    metadata<-as.data.frame(rbinom(n=nrow(features), size=1, prob=0.05))
-    names(metadata)<-'CellType'
-    rownames(metadata)<-rownames(features)
-    
-  }
-  
  
   ############
   # Svensson #
